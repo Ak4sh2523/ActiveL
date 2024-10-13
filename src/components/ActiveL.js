@@ -44,18 +44,26 @@ const Reactive = ({ tracks, setTracks, playTrack }) => {
 
   return (
     <div className="music-player">
-      <ul>
-        {tracks.map((track) => (
-            
-          <li key={track.id} onClick={() => playTrackHandler(tracks.findIndex(t => t.id === track.id))}>
-            {track.title}
-            <span onClick={() => handleDeleteTrack(track.id)} style={{ cursor: 'pointer', marginLeft: '10px' }}>
-              <i className="fas fa-trash" /> {/* Dustbin icon */}
-            </span>
-          </li>
-          
-        ))}
-      </ul>
+      {tracks.length === 0 ? (
+        <p>No tracks available</p>
+      ) : (
+        <ul className="track-list">
+          {tracks.map((track, index) => (
+            <li key={track.id} className="track-item">
+              <span onClick={() => playTrackHandler(index)} style={{ cursor: 'pointer' }}>
+                {track.title}
+              </span>
+              <span
+                onClick={() => handleDeleteTrack(track.id)}
+                style={{ cursor: 'pointer', marginLeft: '10px', color: 'red' }}
+                className="delete-icon"
+              >
+                <i className="fas fa-trash" />
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
