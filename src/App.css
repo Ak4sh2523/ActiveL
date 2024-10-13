@@ -1,38 +1,114 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1c2332; /* Background color for the app */
+  
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh; /* Ensure the app takes full height */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 10px 20px;
+  background-color: #2e3a5270;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.upload-form {
+  display: flex;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.upload-label {
+  cursor: pointer;
+  margin-left: 10px;
+  color: white;
+  font-size: 18px;
+}
+
+.content {
+  flex: 1; /* Take up available space */
+  overflow-y: auto; /* Allow scrolling in this area */
+  padding: 20px; /* Padding around the content */
+}
+
+.music-player-fixed {
+  position: fixed; /* Fix to the bottom */
+  bottom: 0; /* Position at the bottom */
+  left: 0; /* Align to the left */
+  right: 0; /* Align to the right */
+  padding: 10px; /* Padding around the music player */
+  background-color: #282c34; /* Match the navbar */
+  color: white; /* Text color */
+  text-align: center; /* Center text */
+}
+
+.music-player-fixed h2 {
+  margin: 0; /* Remove margin for h2 */
+}
+
+.music-player ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.music-player li {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 5px 0; /* Margin between items */
+  border-bottom: 1px solid #ccc; /* Line between items */
+  color: rgba(238, 228, 228, 0.853);
+}
+
+.music-player li:hover {
+  color: black;
+}
+.music-player-fixed {
+  position: fixed; /* Fix to the bottom */
+  bottom: 0; /* Position at the bottom */
+  left: 0; /* Align to the left */
+  right: 0; /* Align to the right */
+  padding: 10px; /* Padding around the music player */
+  background-color: #282c34; /* Match the navbar */
+  color: white; /* Text color */
+  text-align: center; /* Center text */
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between elements */
+  align-items: center; /* Center items vertically */
+}
+
+.music-player-fixed h2 {
+  margin: 0; /* Remove margin for h2 */
+  flex: 1; /* Allow h2 to take available space */
+}
+
+.controls {
+  display: flex; /* Flexbox for controls */
+  gap: 10px; /* Space between buttons */
+}
+
+.controls button {
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  color: white; /* Button text color */
+  font-size: 24px; /* Increase icon size */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.controls button:hover {
+  color: #61dafb; /* Change color on hover */
+}
+.logo
+{
+  width: 65px;
+  height: 65px;
 }
