@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.6be31c36.css",
-    "main.js": "/static/js/main.867393fd.js",
-    "static/js/453.791ecdef.chunk.js": "/static/js/453.791ecdef.chunk.js",
-    "static/media/Black and Gold Classy Minimalist Circular Name Logo.png": "/static/media/Black and Gold Classy Minimalist Circular Name Logo.c4fdc6458bd506f3e35b.png",
-    "index.html": "/index.html",
-    "main.6be31c36.css.map": "/static/css/main.6be31c36.css.map",
-    "main.867393fd.js.map": "/static/js/main.867393fd.js.map",
-    "453.791ecdef.chunk.js.map": "/static/js/453.791ecdef.chunk.js.map"
+    "main.css": "/ActiveL/static/css/main.6be31c36.css",
+    "main.js": "/ActiveL/static/js/main.e044e423.js",
+    "static/js/453.791ecdef.chunk.js": "/ActiveL/static/js/453.791ecdef.chunk.js",
+    "static/media/Black and Gold Classy Minimalist Circular Name Logo.png": "/ActiveL/static/media/Black and Gold Classy Minimalist Circular Name Logo.c4fdc6458bd506f3e35b.png",
+    "index.html": "/ActiveL/index.html",
+    "main.6be31c36.css.map": "/ActiveL/static/css/main.6be31c36.css.map",
+    "main.e044e423.js.map": "/ActiveL/static/js/main.e044e423.js.map",
+    "453.791ecdef.chunk.js.map": "/ActiveL/static/js/453.791ecdef.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6be31c36.css",
-    "static/js/main.867393fd.js"
+    "static/js/main.e044e423.js"
   ]
 }
