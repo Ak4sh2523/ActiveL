@@ -6,28 +6,56 @@ const STORE_NAME = 'tracks';
 
 // Initialize the database
 export const initDB = async () => {
-  const db = await openDB(DB_NAME, DB_VERSION, {
-    upgrade(db) {
-      db.createObjectStore(STORE_NAME, { keyPath: 'id' });
-    },
-  });
-  return db;
+  try {
+    const db = await openDB(DB_NAME, DB_VERSION, {
+      upgrade(db) {
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+          db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+        }
+      },
+    });
+    return db;
+  } catch (error) {
+    console.error('Failed to open the database:', error);
+  }
 };
 
-// Add tracks to the database
+// Add a track to the database
 export const addTrack = async (track) => {
-  const db = await initDB();
-  await db.put(STORE_NAME, { ...track, id: Date.now() });
+  try {
+    const db = await initDB();
+    if (db) {
+      await db.put(STORE_NAME, { ...track, id: track.id || Date.now() });
+      console.log('Track added successfully');
+    }
+  } catch (error) {
+    console.error('Failed to add track:', error);
+  }
 };
 
 // Get all tracks from the database
 export const getTracks = async () => {
-  const db = await initDB();
-  return db.getAll(STORE_NAME);
+  try {
+    const db = await initDB();
+    if (db) {
+      const tracks = await db.getAll(STORE_NAME);
+      return tracks;
+    }
+  } catch (error) {
+    console.error('Failed to get tracks:', error);
+  }
+  return [];
 };
 
 // Delete a track from the database
 export const deleteTrack = async (id) => {
-  const db = await initDB();
-  await db.delete(STORE_NAME, id);
+  try {
+    const db = await initDB();
+    if (db) {
+      await db.delete(STORE_NAME, id);
+      console.log(`Track with ID ${id} deleted successfully`);
+    }
+  } catch (error) {
+    console.error('Failed to delete track:', error);
+  }
 };
