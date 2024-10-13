@@ -4,7 +4,6 @@ import Reactive from './components/ActiveL'; // Ensure this path is correct
 import { addTrack, getTracks } from './db';
 import logo from './components/Black and Gold Classy Minimalist Circular Name Logo.png';
 
-
 const App = () => {
   const [tracks, setTracks] = useState([]);
   const [newTracks, setNewTracks] = useState([]);
@@ -12,6 +11,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(new Audio());
 
+  // Fetch tracks from the database on initial load
   useEffect(() => {
     const fetchTracks = async () => {
       const storedTracks = await getTracks();
@@ -20,6 +20,7 @@ const App = () => {
     fetchTracks();
   }, []);
 
+  // Play the current track when the track index or play state changes
   useEffect(() => {
     if (tracks.length > 0) {
       audioRef.current.src = tracks[currentTrackIndex]?.src;
@@ -33,6 +34,7 @@ const App = () => {
     };
   }, [currentTrackIndex, isPlaying, tracks]);
 
+  // Handle file selection and load tracks as base64
   const handleChange = (e) => {
     const files = Array.from(e.target.files);
     const validTracks = [];
@@ -49,6 +51,7 @@ const App = () => {
     });
   };
 
+  // Handle form submission to add new tracks to the database
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (newTracks.length > 0) {
@@ -59,6 +62,7 @@ const App = () => {
     }
   };
 
+  // Play a selected track by its index
   const playTrack = (index) => {
     setCurrentTrackIndex(index);
     setIsPlaying(true);
@@ -66,11 +70,13 @@ const App = () => {
     audioRef.current.play();
   };
 
+  // Go to the next track
   const nextTrack = () => {
     setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % tracks.length);
     setIsPlaying(true);
   };
 
+  // Go to the previous track
   const prevTrack = () => {
     setCurrentTrackIndex((prevIndex) => (prevIndex - 1 + tracks.length) % tracks.length);
     setIsPlaying(true);
@@ -79,7 +85,7 @@ const App = () => {
   return (
     <div className="App">
       <nav className="navbar">
-      <img class="logo" src={logo} alt='logo' />
+        <img className="logo" src={logo} alt="logo" />
         <form onSubmit={handleSubmit} className="upload-form">
           <input
             type="file"
