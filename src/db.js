@@ -6,56 +6,36 @@ const STORE_NAME = 'tracks';
 
 // Initialize the database
 export const initDB = async () => {
-  try {
-    const db = await openDB(DB_NAME, DB_VERSION, {
-      upgrade(db) {
-        if (!db.objectStoreNames.contains(STORE_NAME)) {
-          db.createObjectStore(STORE_NAME, { keyPath: 'id' });
-        }
-      },
-    });
-    return db;
-  } catch (error) {
-    console.error('Failed to open the database:', error);
-  }
+  const db = await openDB(DB_NAME, DB_VERSION, {
+    upgrade(db) {
+      db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+    },
+  });
+  return db;
 };
 
-// Add a track to the database
+// Generate a unique ID
+const generateId = async () => {
+  const db = await initDB();
+  const currentTracks = await db.getAll(STORE_NAME);
+  return currentTracks.length + 1; // Simple way to generate unique IDs
+};
+
+// Add tracks to the database
 export const addTrack = async (track) => {
-  try {
-    const db = await initDB();
-    if (db) {
-      await db.put(STORE_NAME, { ...track, id: track.id || Date.now() });
-      console.log('Track added successfully');
-    }
-  } catch (error) {
-    console.error('Failed to add track:', error);
-  }
+  const id = await generateId(); // Get a new ID
+  const db = await initDB();
+  await db.put(STORE_NAME, { ...track, id });
 };
 
 // Get all tracks from the database
 export const getTracks = async () => {
-  try {
-    const db = await initDB();
-    if (db) {
-      const tracks = await db.getAll(STORE_NAME);
-      return tracks;
-    }
-  } catch (error) {
-    console.error('Failed to get tracks:', error);
-  }
-  return [];
+  const db = await initDB();
+  return db.getAll(STORE_NAME);
 };
 
 // Delete a track from the database
 export const deleteTrack = async (id) => {
-  try {
-    const db = await initDB();
-    if (db) {
-      await db.delete(STORE_NAME, id);
-      console.log(`Track with ID ${id} deleted successfully`);
-    }
-  } catch (error) {
-    console.error('Failed to delete track:', error);
-  }
+  const db = await initDB();
+  await db.delete(STORE_NAME, id);
 };
